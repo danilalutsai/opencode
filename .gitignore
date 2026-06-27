@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+*.log
+
+# Runtime data, secrets, and local state should not be committed.
+config/plannotator/active/
+config/plannotator/drafts/
+config/plannotator/history/
+config/plannotator/plans/
+config/plannotator/vendor/
