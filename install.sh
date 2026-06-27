@@ -27,7 +27,7 @@ install_or_update_dependencies() {
 
     brew update
     brew upgrade || true
-    brew install git curl node python || brew upgrade git curl node python || true
+    brew install git curl node python bun || brew upgrade git curl node python bun || true
     return
   fi
 
@@ -39,11 +39,19 @@ install_or_update_dependencies() {
       curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
       sudo apt-get install -y nodejs
     fi
+    if ! need_cmd bun; then
+      curl -fsSL https://bun.sh/install | bash
+      export PATH="$HOME/.bun/bin:$PATH"
+    fi
   elif need_cmd dnf; then
     sudo dnf upgrade -y
     sudo dnf install -y ca-certificates curl git python3 gcc-c++ make nodejs npm
+    if ! need_cmd bun; then
+      curl -fsSL https://bun.sh/install | bash
+      export PATH="$HOME/.bun/bin:$PATH"
+    fi
   elif need_cmd pacman; then
-    sudo pacman -Syu --needed --noconfirm ca-certificates curl git python base-devel nodejs npm
+    sudo pacman -Syu --needed --noconfirm ca-certificates curl git python base-devel nodejs npm bun
   else
     printf 'Unsupported package manager. Install curl, git, python3, node, and npm, then rerun.\n' >&2
     exit 1
@@ -64,6 +72,9 @@ install_or_update_tools() {
   npx -y skills add backnotprop/plannotator@plannotator-setup-goal -g -y || true
   npx -y skills add backnotprop/plannotator@plannotator-visual-explainer -g -y || true
   npx -y skills update -g || true
+
+  log "Installing or updating Compound Engineering for OpenCode"
+  bunx @every-env/compound-plugin install compound-engineering --to opencode
 
   log "Installing OpenCode plugin dependencies"
   if [[ -f "$REPO_DIR/config/opencode/package.json" ]]; then

@@ -16,7 +16,8 @@ The script installs or updates:
 - Plannotator
 - Skills CLI
 - Plannotator skills, including `plannotator-compound`
-- Required system dependencies: `curl`, `git`, `node`, `npm`, and `python3`
+- Compound Engineering OpenCode skills, agents, and `/ce-*` commands
+- Required system dependencies: `curl`, `git`, `node`, `npm`, `bun`, and `python3`
 
 It also symlinks config from this repo to:
 
@@ -31,6 +32,7 @@ It also symlinks config from this repo to:
 3. Complete the authentication steps below.
 4. Test Plannotator with `/plannotator-last` or `/plannotator-review`.
 5. Use `plannotator-compound` when you want a compound planning analysis report.
+6. Use Compound Engineering commands like `/ce-brainstorm`, `/ce-plan`, `/ce-work`, and `/ce-code-review`.
 
 ## Authentication
 
